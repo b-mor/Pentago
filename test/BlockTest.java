@@ -52,4 +52,16 @@ public class BlockTest {
         testBlock.rotateLeft();
         assertEquals(expected, testBlock.getState());
     }
+
+    @Test
+    public void isSpaceOccupied1() {
+        testBlock.setState("..X......");
+        assertFalse(testBlock.isSpaceOccupied(1));
+    }
+
+    @Test
+    public void isSpaceOccupied2() {
+        testBlock.setState("..X......");
+        assertTrue(testBlock.isSpaceOccupied(3));
+    }
 }

@@ -100,4 +100,14 @@ public class Block {
         myState = newState;
     }
 
+    boolean isSpaceOccupied(int thePos) {
+        boolean result = true;
+        int stringPos = thePos - 1;
+        if (myState.charAt(stringPos) == '.') {
+            result = false;
+        }
+
+        return result;
+    }
+
 }
