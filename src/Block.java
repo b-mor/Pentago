@@ -71,15 +71,16 @@ public class Block {
      */
     public void rotateRight() {
         String newState = "";
-        newState = newState.concat(String.valueOf(myState.charAt(6)));
-        newState = newState.concat(String.valueOf(myState.charAt(3)));
-        newState = newState.concat(String.valueOf(myState.charAt(0)));
-        newState = newState.concat(String.valueOf(myState.charAt(7)));
-        newState = newState.concat(String.valueOf(myState.charAt(4)));
-        newState = newState.concat(String.valueOf(myState.charAt(1)));
-        newState = newState.concat(String.valueOf(myState.charAt(8)));
-        newState = newState.concat(String.valueOf(myState.charAt(5)));
-        newState = newState.concat(String.valueOf(myState.charAt(2)));
+        char[] currState = myState.toCharArray();
+        newState = newState.concat(String.valueOf(currState[6]));
+        newState = newState.concat(String.valueOf(currState[3]));
+        newState = newState.concat(String.valueOf(currState[0]));
+        newState = newState.concat(String.valueOf(currState[7]));
+        newState = newState.concat(String.valueOf(currState[4]));
+        newState = newState.concat(String.valueOf(currState[1]));
+        newState = newState.concat(String.valueOf(currState[8]));
+        newState = newState.concat(String.valueOf(currState[5]));
+        newState = newState.concat(String.valueOf(currState[2]));
         myState = newState;
     }
 
@@ -88,15 +89,16 @@ public class Block {
      */
     public void rotateLeft() {
         String newState = "";
-        newState = newState.concat(String.valueOf(myState.charAt(2)));
-        newState = newState.concat(String.valueOf(myState.charAt(5)));
-        newState = newState.concat(String.valueOf(myState.charAt(8)));
-        newState = newState.concat(String.valueOf(myState.charAt(1)));
-        newState = newState.concat(String.valueOf(myState.charAt(4)));
-        newState = newState.concat(String.valueOf(myState.charAt(7)));
-        newState = newState.concat(String.valueOf(myState.charAt(0)));
-        newState = newState.concat(String.valueOf(myState.charAt(3)));
-        newState = newState.concat(String.valueOf(myState.charAt(6)));
+        char[] currState = myState.toCharArray();
+        newState = newState.concat(String.valueOf(currState[2]));
+        newState = newState.concat(String.valueOf(currState[5]));
+        newState = newState.concat(String.valueOf(currState[8]));
+        newState = newState.concat(String.valueOf(currState[1]));
+        newState = newState.concat(String.valueOf(currState[4]));
+        newState = newState.concat(String.valueOf(currState[7]));
+        newState = newState.concat(String.valueOf(currState[0]));
+        newState = newState.concat(String.valueOf(currState[3]));
+        newState = newState.concat(String.valueOf(currState[6]));
         myState = newState;
     }
 
