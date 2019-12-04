@@ -101,7 +101,7 @@ public class Board {
 
         if (!isValidMove(theBlockNum, thePos)) {
             throw new IllegalStateException("Attempting to play move on invalid location.");
-        } else if (!theDir.equalsIgnoreCase("L") || !theDir.equalsIgnoreCase("R")) {
+        } else if (!theDir.equalsIgnoreCase("L") && !theDir.equalsIgnoreCase("R")) {
             throw new IllegalArgumentException("Invalid direction operator.");
         }
 
@@ -393,22 +393,14 @@ public class Board {
         // Utilizes the anonymous Tuple class to pair the state and index pairs to pass into helper methods later.
         // Unlike the horizontal and vertical lines, the diagonals have no pretty way to increment through
         // and add the lines as they appear on the board. It looks ugly, I know.
-        diagList.add(new Tuple[] {new Tuple(b1, 3), new Tuple(b1, 7),
-                new Tuple(b3, 2), new Tuple(b4, 3), new Tuple(b4, 7)});
-        diagList.add(new Tuple[] {new Tuple(b1, 0), new Tuple(b1, 4),
-                new Tuple(b1, 8), new Tuple(b4, 0), new Tuple(b4, 4)});
-        diagList.add(new Tuple[] {new Tuple(b1, 4), new Tuple(b1, 8),
-                new Tuple(b4, 0), new Tuple(b4, 4, new Tuple(b4, 8)});
-        diagList.add(new Tuple[] {new Tuple(b1, 1), new Tuple(b1, 5),
-                new Tuple(b2, 6), new Tuple(b4, 1), new Tuple(b4, 5)});
-        diagList.add(new Tuple[] {new Tuple(b2, 1), new Tuple(b2, 3),
-                new Tuple(b1, 8), new Tuple(b3, 1), new Tuple(b3, 3)});
-        diagList.add(new Tuple[] {new Tuple(b2, 2), new Tuple(b2, 4),
-                new Tuple(b2, 6), new Tuple(b3, 2), new Tuple(b3, 4)});
-        diagList.add(new Tuple[] {new Tuple(b2, 4), new Tuple(b2, 6),
-                new Tuple(b3, 2), new Tuple(b3, 4), new Tuple(b3, 6)});
-        diagList.add(new Tuple[] {new Tuple(b2, 5), new Tuple(b2, 7),
-                new Tuple(b4, 0), new Tuple(b3, 5), new Tuple(b3, 7)});
+        diagList.add(new Tuple[] {new Tuple(b1, 3), new Tuple(b1, 7), new Tuple(b3, 2), new Tuple(b4, 3), new Tuple(b4, 7)});
+        diagList.add(new Tuple[] {new Tuple(b1, 0), new Tuple(b1, 4), new Tuple(b1, 8), new Tuple(b4, 0), new Tuple(b4, 4)});
+        diagList.add(new Tuple[] {new Tuple(b1, 4), new Tuple(b1, 8), new Tuple(b4, 0), new Tuple(b4, 4), new Tuple(b4, 8)});
+        diagList.add(new Tuple[] {new Tuple(b1, 1), new Tuple(b1, 5), new Tuple(b2, 6), new Tuple(b4, 1), new Tuple(b4, 5)});
+        diagList.add(new Tuple[] {new Tuple(b2, 1), new Tuple(b2, 3), new Tuple(b1, 8), new Tuple(b3, 1), new Tuple(b3, 3)});
+        diagList.add(new Tuple[] {new Tuple(b2, 2), new Tuple(b2, 4), new Tuple(b2, 6), new Tuple(b3, 2), new Tuple(b3, 4)});
+        diagList.add(new Tuple[] {new Tuple(b2, 4), new Tuple(b2, 6), new Tuple(b3, 2), new Tuple(b3, 4), new Tuple(b3, 6)});
+        diagList.add(new Tuple[] {new Tuple(b2, 5), new Tuple(b2, 7), new Tuple(b4, 0), new Tuple(b3, 5), new Tuple(b3, 7)});
 
         for (Tuple[] line : diagList) {
             currStreak = 0;
@@ -420,6 +412,17 @@ public class Board {
         }
 
         return currMax;
+    }
+
+    /**
+     * Checks to see if the current state of the board has made someone a winner.
+     * Should be called between making a new move and before letting the next player have their turn.
+     *
+     * @param thePlayer The player we are checking the win state for.
+     * @return True if the player has won the game, false if not.
+     */
+    public boolean isWinner(String thePlayer) {
+        return (evaluateUtility(thePlayer) >= 5);
     }
 
     /**
@@ -450,13 +453,13 @@ public class Board {
         char[] b4 = myBlock4.getState().toCharArray();
 
         System.out.println(HORIZONTAL_PRINT_LINE);
-        System.out.println("| " + b1[0] + b1[1] + b1[2] + " | " + b2[0] + b2[1] + b2[2] + " |");
-        System.out.println("| " + b1[3] + b1[4] + b1[5] + " | " + b2[3] + b2[4] + b2[5] + " |");
-        System.out.println("| " + b1[6] + b1[7] + b1[8] + " | " + b2[6] + b2[7] + b2[8] + " |");
+        System.out.println("| " + b1[0] + s + b1[1] + s + b1[2] + " | " + b2[0] + s + b2[1] + s + b2[2] + " |");
+        System.out.println("| " + b1[3] + s + b1[4] + s + b1[5] + " | " + b2[3] + s + b2[4] + s + b2[5] + " |");
+        System.out.println("| " + b1[6] + s + b1[7] + s + b1[8] + " | " + b2[6] + s + b2[7] + s + b2[8] + " |");
         System.out.println(HORIZONTAL_PRINT_LINE);
-        System.out.println("| " + b3[0] + b3[1] + b3[2] + " | " + b4[0] + b4[1] + b4[2] + " |");
-        System.out.println("| " + b3[3] + b3[4] + b3[5] + " | " + b4[3] + b4[4] + b4[5] + " |");
-        System.out.println("| " + b3[6] + b3[7] + b3[8] + " | " + b4[6] + b4[7] + b4[8] + " |");
+        System.out.println("| " + b3[0] + s + b3[1] + s + b3[2] + " | " + b4[0] + s + b4[1] + s + b4[2] + " |");
+        System.out.println("| " + b3[3] + s + b3[4] + s + b3[5] + " | " + b4[3] + s + b4[4] + s + b4[5] + " |");
+        System.out.println("| " + b3[6] + s + b3[7] + s + b3[8] + " | " + b4[6] + s + b4[7] + s + b4[8] + " |");
         System.out.println(HORIZONTAL_PRINT_LINE);
 
     }
