@@ -76,10 +76,10 @@ public class Board {
                 myBlock2.updateBlock(thePosNum, thePlayer);
                 break;
             case 3:
-                myBlock2.updateBlock(thePosNum, thePlayer);
+                myBlock3.updateBlock(thePosNum, thePlayer);
                 break;
             case 4:
-                myBlock2.updateBlock(thePosNum, thePlayer);
+                myBlock4.updateBlock(thePosNum, thePlayer);
                 break;
         }
     }
