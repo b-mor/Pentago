@@ -73,8 +73,9 @@ public class Game {
                 if (gameOver) {
                     break;
                 }
-                computerTurn();
+                Move computerMove = computerTurn();
                 myBoard.printBoard();
+                System.out.println("The computer plays " + computerMove.toString());
                 gameOver = checkForWinners();
                 if (gameOver) {
                     break;
@@ -84,8 +85,9 @@ public class Game {
         // Computer goes first.
         else {
             while (!gameOver) {
-                computerTurn();
+                Move computerMove = computerTurn();
                 myBoard.printBoard();
+                System.out.println("The computer plays " + computerMove.toString());
                 gameOver = checkForWinners();
                 if (gameOver) {
                     break;
@@ -144,15 +146,14 @@ public class Game {
     /**
      * Creates an alpha beta tree and searches it to decide the next best move to make, then plays that move.
      */
-    private void computerTurn() {
+    private Move computerTurn() {
         GameTreeNode decisionNode = new GameTreeNode(myBoard, null, myComputer, "MAX");
         decisionNode.generateTree();
         decisionNode.alphaBetaPruningSearch();
         Move computerMove = decisionNode.getMove();
         myBoard.makeMove(computerMove.getPlayBlock(), computerMove.getPosition(),
                          computerMove.getRotatingBlock(), computerMove.getDirection(), myComputer);
-        System.out.println("The computer played " + decisionNode.getMove().toString());
-
+        return computerMove;
     }
 
     /**
