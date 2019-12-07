@@ -102,6 +102,12 @@ public class Block {
         myState = newState;
     }
 
+    /**
+     * Checks whether or not a specified spot on the game Block is open for play.
+     *
+     * @param thePos The index of the block to check.
+     * @return True if no player has played in this spot, false if they have.
+     */
     boolean isSpaceOccupied(int thePos) {
         boolean result = true;
         int stringPos = thePos - 1;

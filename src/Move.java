@@ -3,10 +3,10 @@
  */
 public class Move {
 
-    int myPlayBlock;
-    int myPosition;
-    int myRotatingBlock;
-    String myDirection;
+    private int myPlayBlock;
+    private int myPosition;
+    private int myRotatingBlock;
+    private String myDirection;
 
     /**
      * Move object constructor.
@@ -23,19 +23,31 @@ public class Move {
         myDirection = theDirection;
     }
 
-    public int getMyPlayBlock() {
+    /**
+     * Alternate constructor that creates a new Move object as a copy of an existing one.
+     *
+     * @param theMove The move to be copied into the new object.
+     */
+    public Move(Move theMove) {
+        myPlayBlock = theMove.getPlayBlock();
+        myPosition = theMove.getPosition();
+        myRotatingBlock = theMove.getRotatingBlock();
+        myDirection = "" + theMove.getDirection();
+    }
+
+    public int getPlayBlock() {
         return myPlayBlock;
     }
 
-    public int getMyPosition() {
+    public int getPosition() {
         return myPosition;
     }
 
-    public int getMyRotatingBlock() {
+    public int getRotatingBlock() {
         return myRotatingBlock;
     }
 
-    public String getMyDirection() {
+    public String getDirection() {
         return myDirection;
     }
 

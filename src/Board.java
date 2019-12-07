@@ -26,11 +26,15 @@ public class Board {
         myBlock4 = new Block();
     }
 
-    public Board(String state1, String state2, String state3, String state4) {
-        myBlock1 = new Block(state1);
-        myBlock2 = new Block(state2);
-        myBlock3 = new Block(state3);
-        myBlock4 = new Block(state4);
+    /**
+     * Alternate constructor that creates a deep copy of a Board object.
+     * @param theBoard
+     */
+    public Board(Board theBoard) {
+        myBlock1 = new Block(theBoard.getBlock(1).getState());
+        myBlock2 = new Block(theBoard.getBlock(2).getState());
+        myBlock3 = new Block(theBoard.getBlock(3).getState());
+        myBlock4 = new Block(theBoard.getBlock(4).getState());
     }
 
     /**

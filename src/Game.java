@@ -8,6 +8,7 @@ public class Game {
     /* The pieces that the player will use for the game (W for white pieces, B for black pieces.) */
     private String myPlayer;
 
+    /* Name of the player. */
     private String myPlayerName;
 
     /* The pieces that the computer will use for the game (W for white pieces, B for black pieces.) */
@@ -20,6 +21,14 @@ public class Game {
         myBoard = new Board();
     }
 
+    public static void main(String[] theArgs) {
+        Game game = new Game();
+        game.startUp();
+    }
+
+    /**
+     * Shows the user the start up prompt, collects information from them, then kicks off the main game loop.
+     */
     public void startUp() {
         myPlayer = "";
         myPlayerName = "";
@@ -42,24 +51,14 @@ public class Game {
             scanner.nextLine();
         }
 
-        debug();
-        //TODO: gameLoop(firstPlayer);
+        gameLoop(firstPlayer);
     }
 
-    private void debug() {
-        boolean gameOver = false;
-        myBoard.printBoard();
-        while (!gameOver) {
-            humanTurn();
-            myBoard.printBoard();
-            gameOver = checkForWinners();
-            if (gameOver) {
-                break;
-            }
-        }
-
-    }
-
+    /**
+     * Main loop for the game. Lets each player go and checks for win state after each turn.
+     *
+     * @param theFirstPlayer The player who gets to play the first turn.
+     */
     private void gameLoop(int theFirstPlayer) {
         boolean gameOver = false;
         myBoard.printBoard();
@@ -99,6 +98,11 @@ public class Game {
         }
     }
 
+    /**
+     * Checks the current state of the game board for whether or not a player has won the game.
+     *
+     * @return True if the game is over, false if not.
+     */
     private boolean checkForWinners() {
         boolean gameOver = false;
         if (myBoard.isWinner(myPlayer)) {
@@ -111,6 +115,10 @@ public class Game {
         return gameOver;
     }
 
+    /**
+     * Lets the human play their turn. Will receive user input, validate that input, and make the move
+     * once a valid one has been made.
+     */
     private void humanTurn() {
         Scanner scanner = new Scanner(System.in);
         String move = "";
@@ -131,8 +139,18 @@ public class Game {
         myBoard.makeMove(moveBlock, blockIndex, rotateBlock, direction, myPlayer);
     }
 
+    /**
+     * Creates an alpha beta tree and searches it to decide the next best move to make, then plays that move.
+     */
     private void computerTurn() {
-        // TODO:
+        GameTreeNode decisionNode = new GameTreeNode(myBoard, null, myComputer, "MAX");
+        decisionNode.generateTree();
+        decisionNode.alphaBetaPruningSearch();
+        Move computerMove = decisionNode.getMove();
+        myBoard.makeMove(computerMove.getPlayBlock(), computerMove.getPosition(),
+                         computerMove.getRotatingBlock(), computerMove.getDirection(), myComputer);
+        System.out.println("The computer played " + decisionNode.getMove().toString());
+
     }
 
     /**
