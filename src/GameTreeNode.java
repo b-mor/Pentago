@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class GameTreeNode {
 
@@ -53,6 +55,7 @@ public class GameTreeNode {
      */
     private void populateChildren() {
         ArrayList<Move> validMoves = myBoard.getValidMoves();  // Get all valid moves for the current board state.
+        Collections.shuffle(validMoves, new Random());
         for (Move move : validMoves) {
             Board board = new Board(myBoard);
             board.makeMove(move.getPlayBlock(), move.getPosition(), move.getRotatingBlock(),
