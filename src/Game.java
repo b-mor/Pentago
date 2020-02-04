@@ -133,6 +133,9 @@ public class Game {
             move = scanner.nextLine();
             if (!validateMoveInput(move)) {
                 System.out.println("Invalid input.\n");
+                System.out.println("Enter moves in format following format: ");
+                System.out.println("Quadrant (1-4)/Index (1-9) Quadrant (1-4) Direction (L or R)");
+                System.out.println("Example: 2/3 4R or 1/1 2L");
             }
         }
 
